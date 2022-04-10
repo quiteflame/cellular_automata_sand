@@ -104,7 +104,7 @@ impl Worldable for World {
                 continue;
             }
 
-            // Current element is not stationary and element below it is not stationary
+            // Current element is updatable and element below it is not stationary
             // so we can swap them
             let index_of_element_below =
                 min(i as u32 + self.width, self.width * self.height - 1) as usize;
@@ -124,29 +124,30 @@ impl Worldable for World {
 
             if element.kind == SubstanceKind::SAND {
                 // Element on random side is stationary, no need to do anyting
-                if element_below_to_random_side.is_stationary {
+                if !element_below_to_random_side.is_stationary {
+                    self.scrach_elements.swap(i, index_of_below_random_side);
                     continue;
                 }
             }
 
             if element.kind == SubstanceKind::WATER {
-                if element_below_to_random_side.is_stationary {
-                    // Swap with element to random side
-                    let index_of_random_side =
-                        min((i as i32) - factor, (self.width * self.height - 1) as i32) as usize;
-
-                    let element_on_random_side = &self.elements[index_of_random_side];
-                    if element_on_random_side.is_stationary {
-                        continue;
-                    }
-
-                    self.scrach_elements.swap(i, index_of_random_side);
+                if !element_below_to_random_side.is_stationary {
+                    self.scrach_elements.swap(i, index_of_below_random_side);
                     continue;
                 }
-            }
 
-            // Element on random side is not stationary, so we can swap current with it
-            self.scrach_elements.swap(i, index_of_below_random_side);
+                // Swap with element to random side
+                let index_of_random_side =
+                    min((i as i32) - factor, (self.width * self.height - 1) as i32) as usize;
+
+                let element_on_random_side = &self.elements[index_of_random_side];
+                if element_on_random_side.is_stationary {
+                    continue;
+                }
+
+                self.scrach_elements.swap(i, index_of_random_side);
+                continue;
+            }
         }
         self.elements = self.scrach_elements.clone();
     }
