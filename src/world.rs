@@ -109,7 +109,7 @@ impl Worldable for World {
             let index_of_element_below =
                 min(i as u32 + self.width, self.width * self.height - 1) as usize;
             let element_below = &self.elements[index_of_element_below];
-            if !element_below.is_stationary {
+            if !element_below.is_stationary || element.density > element_below.density {
                 self.scrach_elements.swap(i, index_of_element_below);
                 continue;
             }
@@ -123,7 +123,6 @@ impl Worldable for World {
             let element_below_to_random_side = &self.elements[index_of_below_random_side];
 
             if element.kind == SubstanceKind::SAND {
-                // Element on random side is stationary, no need to do anyting
                 if !element_below_to_random_side.is_stationary {
                     self.scrach_elements.swap(i, index_of_below_random_side);
                     continue;

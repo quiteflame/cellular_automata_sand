@@ -12,6 +12,7 @@ pub struct Substance {
     pub color: [u8; 4],
     pub is_stationary: bool,
     pub is_updatable: bool,
+    pub density: f32,
 }
 
 impl Substance {
@@ -21,6 +22,7 @@ impl Substance {
             color: [0x0, 0x0, 0x0, 0xff],
             is_stationary: false,
             is_updatable: false,
+            density: 0.0,
         }
     }
 
@@ -30,6 +32,7 @@ impl Substance {
             color: [0x7f, 0x7f, 0x7f, 0xff],
             is_stationary: true,
             is_updatable: false,
+            density: 1.0,
         }
     }
 
@@ -39,6 +42,7 @@ impl Substance {
             color: [0x5e, 0x48, 0x00, 0xff],
             is_stationary: true,
             is_updatable: true,
+            density: 1.0,
         }
     }
 
@@ -48,6 +52,7 @@ impl Substance {
             color: [0x5e, 0x48, 0xe8, 0xff],
             is_stationary: true,
             is_updatable: true,
+            density: 0.5,
         }
     }
 }
