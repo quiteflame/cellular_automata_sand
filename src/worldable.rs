@@ -6,5 +6,4 @@ pub trait Worldable {
     fn mouse_press(&mut self, at: (u32, u32));
     fn update(&mut self);
     fn draw(&self, frame: &mut [u8]);
-    fn resized(&mut self, width: u32, height: u32);
 }

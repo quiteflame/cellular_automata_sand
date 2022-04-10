@@ -1,5 +1,3 @@
-use rand::Rng;
-
 #[derive(Clone, PartialEq, Debug)]
 pub enum SubstanceKind {
     AIR,

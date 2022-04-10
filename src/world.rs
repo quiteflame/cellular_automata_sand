@@ -21,8 +21,6 @@ pub struct World {
     height: u32,
     drop_sand: bool,
     drop_water: bool,
-    put_wall: bool,
-    wall_location: (u32, u32),
 }
 
 impl World {
@@ -36,8 +34,6 @@ impl World {
             height: height,
             drop_sand: false,
             drop_water: false,
-            put_wall: false,
-            wall_location: (0, 0),
         }
     }
 
@@ -63,11 +59,6 @@ impl World {
 }
 
 impl Worldable for World {
-    fn resized(&mut self, width: u32, height: u32) {
-        // self.width = width;
-        // self.height = height;
-    }
-
     fn setup(&mut self) {
         let size = (self.width.checked_mul(self.height).expect("too big") - self.width) as usize;
         let stone = vec![Substance::stone(); self.width as usize];

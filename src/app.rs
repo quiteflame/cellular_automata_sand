@@ -77,7 +77,6 @@ impl App {
                 // Resize the window
                 if let Some(size) = self.input.window_resized() {
                     self.pixels.resize_surface(size.width, size.height);
-                    self.world.resized(size.width, size.height);
                 }
 
                 if self.input.mouse_pressed(0) {
