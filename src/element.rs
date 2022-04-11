@@ -100,6 +100,7 @@ impl Element {
         let x = index % world.width;
         let y = index / world.width;
 
+        // check below
         let index_below = world.index(x, y + 1);
         let element_below = world.element(index_below);
 
@@ -111,8 +112,7 @@ impl Element {
         if element_below.stype == ElementType::MovableSolid
             || element_below.stype == ElementType::ImmovableSolid
         {
-            // check diagonally
-
+            // check diagonally (with random preffered side)
             let random: bool = rand::random();
             let factor: i32 = if random { -1 } else { 1 };
 
@@ -150,6 +150,7 @@ impl Element {
         let x = index % world.width;
         let y = index / world.width;
 
+        // check below
         let index_below = world.index(x, y + 1);
         let element_below = world.element(index_below);
 
@@ -158,8 +159,7 @@ impl Element {
             return true;
         }
 
-        // check diagonally
-
+        // check diagonally (with random preffered side)
         let random: bool = rand::random();
         let factor: i32 = if random { -1 } else { 1 };
 
@@ -185,6 +185,7 @@ impl Element {
             }
         }
 
+        // check side (with random preffered side)
         if world.within_bounds(x as i32 - factor) {
             let side = x as i32 - factor;
             let index_left = world.index(side as usize, y);
